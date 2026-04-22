@@ -1,0 +1,527 @@
+/* ============================================================
+   style.css — Stylesheet Eksternal (Modul 3: Eksternal CSS)
+   Tema: Glass Morphism Biru Gelap — Stellar
+   ============================================================ */
+
+/* ---- CSS Variables: warna dan nilai yang dipakai berulang ---- */
+:root {
+  --bg-dark:      #020b18;        /* Warna background utama: biru hitam pekat */
+  --blue-deep:    #041629;        /* Biru sangat gelap untuk lapisan bawah */
+  --blue-mid:     #0a2a4a;        /* Biru tengah untuk gradien */
+  --blue-accent:  #1a6baa;        /* Biru terang sebagai aksen */
+  --blue-glow:    #3a9de9;        /* Biru terang untuk efek glow */
+  --glass-bg:     rgba(10, 30, 60, 0.45);   /* Background transparan untuk card glass */
+  --glass-border: rgba(58, 157, 233, 0.25); /* Border glass semi-transparan */
+  --text-light:   #e8f4ff;        /* Warna teks utama: putih kebiruan */
+  --text-muted:   #7aabcf;        /* Warna teks sekunder: biru muda */
+  --gold-accent:  #c9a84c;        /* Warna emas untuk highlight */
+  --font-display: 'Cormorant Garamond', serif;  /* Font untuk judul */
+  --font-body:    'Jost', sans-serif;           /* Font untuk isi teks */
+}
+
+/* ---- Reset & Base Style ---- */
+/* Menghapus margin dan padding bawaan browser, lalu set box-sizing */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ---- Body: background dan font dasar ---- */
+/* Ini adalah styling body menggunakan CSS Internal-style, tapi ditulis di file eksternal */
+body {
+  background-color: var(--bg-dark);        /* Warna latar belakang utama */
+  background-image:                         /* Gradien radial berlapis memberi kedalaman */
+    radial-gradient(ellipse at 20% 20%, rgba(10, 50, 100, 0.6) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(5, 30, 70, 0.5) 0%, transparent 55%);
+  color: var(--text-light);                 /* Warna teks default */
+  font-family: var(--font-body);            /* Font default seluruh halaman */
+  font-weight: 300;
+  line-height: 1.8;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ---- Canvas untuk animasi bintang bertebaran ---- */
+#starCanvas {
+  position: fixed;     /* Tetap di background meski halaman di-scroll */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;          /* Di bawah semua konten */
+  pointer-events: none;/* Tidak menghalangi klik */
+}
+
+/* ---- Semua elemen konten di atas canvas ---- */
+header, section, footer, .hero {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================================
+   HEADER / NAVIGASI
+   ============================================================ */
+.site-header {
+  /* CSS Inline yang dikonversi ke eksternal: display flex untuk layout */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  position: fixed;           /* Header tetap di atas saat scroll */
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  /* Background glass untuk header */
+  background: rgba(2, 11, 24, 0.7);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+/* Logo teks di header */
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 4px;
+  color: var(--blue-glow);
+  /* Text-shadow untuk efek glow (Modul 3: Text Properties) */
+  text-shadow: 0 0 20px rgba(58, 157, 233, 0.8);
+}
+
+/* Link navigasi */
+.site-header nav a {
+  /* text-decoration: none → menghapus underline bawaan link */
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  /* letter-spacing: jarak antar huruf (Modul 3: Letter Spacing) */
+  letter-spacing: 2px;
+  /* text-transform: mengubah teks jadi huruf kapital (Modul 3: Text Transformation) */
+  text-transform: uppercase;
+  margin-left: 32px;
+  transition: color 0.3s ease;
+}
+
+/* Hover state pada link navigasi (Pseudo-class selector - Modul 3) */
+.site-header nav a:hover {
+  color: var(--blue-glow);
+  text-shadow: 0 0 10px rgba(58, 157, 233, 0.6);
+}
+
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  /* text-align: center → rata tengah (Modul 3: Text Alignment) */
+  text-align: center;
+  padding: 100px 20px 60px;
+}
+
+/* Judul utama hero */
+.hero-title {
+  font-family: var(--font-display);
+  /* font-size besar untuk h1 (Modul 3: CSS Properties) */
+  font-size: clamp(4rem, 12vw, 9rem);
+  font-weight: 300;
+  /* line-height: jarak antar baris (Modul 3: Line Height) */
+  line-height: 1.05;
+  color: var(--text-light);
+  /* text-shadow: bayangan teks (Modul 3: Text Shadow) */
+  text-shadow:
+    0 0 60px rgba(58, 157, 233, 0.4),
+    0 0 120px rgba(58, 157, 233, 0.2);
+  margin-bottom: 24px;
+  /* Animasi muncul dari bawah saat halaman dimuat */
+  animation: fadeUp 1.2s ease both;
+}
+
+/* Teks em dalam judul → italic (Modul 2: Formatting) */
+.hero-title em {
+  font-style: italic;
+  /* color: warna teks (Modul 3: Text Color) */
+  color: var(--blue-glow);
+}
+
+/* Teks sub-judul hero */
+.hero-sub {
+  font-size: 1rem;
+  /* letter-spacing untuk sub-judul (Modul 3) */
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  margin-bottom: 36px;
+  animation: fadeUp 1.2s 0.2s ease both;
+}
+
+/* Tanggal hari ini di hero */
+.hero-date {
+  margin-top: 20px;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  /* text-transform: uppercase (Modul 3) */
+  text-transform: uppercase;
+  color: var(--blue-accent);
+  animation: fadeUp 1.2s 0.4s ease both;
+}
+
+/* ============================================================
+   TOMBOL (BUTTON)
+   ============================================================ */
+
+/* Tombol utama di hero */
+.btn-hero {
+  /* background-color untuk button (Modul 3: Background) */
+  background: transparent;
+  border: 1px solid var(--blue-glow);
+  color: var(--blue-glow);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 14px 40px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: fadeUp 1.2s 0.3s ease both;
+  /* border-radius: sudut membulat (dipakai di CSS) */
+  border-radius: 2px;
+}
+
+/* Hover pada tombol hero */
+.btn-hero:hover {
+  background: var(--blue-glow);
+  color: var(--bg-dark);
+  /* box-shadow untuk efek glow saat hover */
+  box-shadow: 0 0 30px rgba(58, 157, 233, 0.5);
+}
+
+/* Tombol di dalam card */
+.btn-card {
+  margin-top: 16px;
+  background: rgba(26, 107, 170, 0.2);
+  border: 1px solid var(--glass-border);
+  color: var(--blue-glow);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.btn-card:hover {
+  background: rgba(58, 157, 233, 0.3);
+  box-shadow: 0 0 15px rgba(58, 157, 233, 0.3);
+}
+
+/* ============================================================
+   SECTION UMUM
+   ============================================================ */
+.section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 80px 24px;
+}
+
+/* Judul tiap section */
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 300;
+  /* text-align: center (Modul 3: Text Alignment) */
+  text-align: center;
+  margin-bottom: 48px;
+  color: var(--text-light);
+  letter-spacing: 2px;
+}
+
+/* ============================================================
+   GLASS CARD — Efek Glass Morphism (Modul 3: Background)
+   ============================================================ */
+.glass {
+  /* background semi-transparan: inti dari glass morphism */
+  background: var(--glass-bg);
+  /* backdrop-filter: efek blur di belakang elemen */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  /* border semi-transparan */
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  /* box-shadow untuk efek kedalaman */
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(58, 157, 233, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efek saat card di-hover */
+.glass:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(58, 157, 233, 0.15),
+    inset 0 1px 0 rgba(58, 157, 233, 0.2);
+}
+
+/* ---- Layout card utama (tentang) ---- */
+.card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  overflow: hidden;
+}
+
+/* Gambar di dalam card (Modul 7: Gambar) */
+.card-img {
+  width: 100%;
+  max-width: 380px;
+  height: 100%;
+  min-height: 300px;
+  object-fit: cover;   /* Gambar memenuhi area tanpa terdistorsi */
+  /* border-radius hanya sudut kiri (Modul 3: CSS Properties) */
+  border-radius: 20px 0 0 20px;
+}
+
+/* Body teks di dalam card */
+.card-body {
+  flex: 1;
+  padding: 40px 36px;
+  min-width: 280px;
+}
+
+/* h3 di dalam card */
+.card-body h3 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+/* mark: teks yang disorot (Modul 2: Formatting) */
+.card-body mark {
+  background: rgba(201, 168, 76, 0.25);
+  color: var(--gold-accent);
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+
+/* Paragraf di dalam card */
+.card-body p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin-bottom: 12px;
+  /* text-indent: indentasi baris pertama paragraf (Modul 3: Text Indentation) */
+  text-indent: 20px;
+}
+
+/* strong: teks tebal (Modul 2: Formatting) */
+.card-body strong {
+  color: var(--text-light);
+  font-weight: 400;
+}
+
+/* em: teks miring (Modul 2: Formatting) */
+.card-body em {
+  font-style: italic;
+  color: var(--blue-glow);
+  opacity: 0.9;
+}
+
+/* del: teks dicoret (Modul 2: Formatting) */
+.card-body del {
+  color: #5a7a9a;
+  text-decoration-color: rgba(90, 122, 154, 0.6);
+}
+
+/* ins: teks disisipkan / underline (Modul 2: Formatting) */
+.card-body ins {
+  text-decoration-color: var(--gold-accent);
+  color: var(--gold-accent);
+}
+
+/* sub: subscript (Modul 2: Formatting) */
+.card-body sub {
+  color: var(--blue-glow);
+  font-size: 0.7em;
+}
+
+/* sup: superscript (Modul 2: Formatting) */
+.card-body sup {
+  color: var(--blue-glow);
+  font-size: 0.7em;
+}
+
+/* ============================================================
+   GALERI — Grid Gambar (Modul 7: Gambar)
+   ============================================================ */
+.gallery-grid {
+  display: grid;
+  /* 3 kolom otomatis menyesuaikan lebar layar */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* Item gambar dalam galeri */
+.gallery-item {
+  overflow: hidden;
+  padding: 16px;
+  text-align: center;
+}
+
+/* Gambar di dalam figure galeri */
+.gallery-item img {
+  width: 100%;
+  height: 180px;
+  /* object-fit: cover agar gambar responsif dan tidak distorsi */
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.4s ease;
+}
+
+/* Zoom saat hover pada gambar galeri */
+.gallery-item:hover img {
+  transform: scale(1.04);
+}
+
+/* Caption gambar (Modul 7: Gambar) */
+.gallery-item figcaption {
+  margin-top: 12px;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   LIST — ul dan ol (Modul 2: HTML)
+   ============================================================ */
+.card-body ul,
+.card-body ol {
+  /* padding-left: indentasi untuk list (Modul 3) */
+  padding-left: 20px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.card-body li {
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+/* Custom bullet untuk ul */
+.card-body ul li::marker {
+  color: var(--blue-glow);
+  content: "✦ ";
+}
+
+/* Angka ol berwarna aksen */
+.card-body ol li::marker {
+  color: var(--gold-accent);
+}
+
+/* ============================================================
+   SECTION MEDIA — Video & Audio (Modul 7)
+   ============================================================ */
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+/* Card media (video / audio) */
+.media-card {
+  padding: 28px;
+  cursor: pointer;
+}
+
+/* h3 dalam media card */
+.media-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--text-light);
+  margin-bottom: 8px;
+}
+
+/* Garis pembatas (hr) */
+.divider {
+  border: none;
+  border-top: 1px solid var(--glass-border);
+  margin: 12px 0 16px;
+}
+
+/* Caption bawah media */
+.media-caption {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  /* text-indent TIDAK dipakai di caption agar tidak menjorok */
+  text-indent: 0;
+  margin-top: 8px;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  text-align: center;
+  /* padding atas bawah footer (Modul 3: CSS Properties) */
+  padding: 40px 20px;
+  border-top: 1px solid var(--glass-border);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  /* text-transform: uppercase (Modul 3) */
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   ANIMASI KEYFRAMES
+   ============================================================ */
+
+/* Animasi muncul dari bawah */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — Media Query (Modul 7: Gambar Responsif)
+   ============================================================ */
+@media (max-width: 700px) {
+  /* Header padding lebih kecil di mobile */
+  .site-header {
+    padding: 16px 24px;
+  }
+
+  /* Navigasi disembunyikan di layar kecil */
+  .site-header nav {
+    display: none;
+  }
+
+  /* Card beralih ke layout vertikal di mobile */
+  .card {
+    flex-direction: column;
+  }
+
+  /* Gambar card jadi lebar penuh di mobile */
+  .card-img {
+    max-width: 100%;
+    min-height: 200px;
+    border-radius: 20px 20px 0 0;
+  }
+}

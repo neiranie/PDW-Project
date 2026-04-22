@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <!-- Meta charset untuk mendukung karakter Indonesia -->
+  <meta charset="UTF-8" />
+  <!-- Meta viewport agar tampilan responsif di semua ukuran layar -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Judul halaman yang muncul di tab browser -->
+  <title>Stellar — Dunia Bintang</title>
+
+  <!-- Google Fonts: Cormorant Garamond untuk judul, Jost untuk body -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet" />
+
+  <!-- Link ke file CSS eksternal (Modul 3: Eksternal CSS) -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===================== CANVAS UNTUK BINTANG ANIMASI ===================== -->
+  <!-- Canvas digunakan JavaScript untuk menggambar bintang bertebaran -->
+  <canvas id="starCanvas"></canvas>
+
+  <!-- ===================== HEADER / NAVIGASI ===================== -->
+  <header class="site-header">
+    <!-- Logo teks dengan styling CSS -->
+    <div class="logo">✦ STELLAR</div>
+
+    <!-- Navigasi anchor link ke masing-masing section -->
+    <nav>
+      <a href="#tentang">Tentang</a>
+      <a href="#galeri">Galeri</a>
+      <a href="#fakta">Fakta</a>
+      <a href="#media">Media</a>
+    </nav>
+  </header>
+
+  <!-- ===================== SECTION HERO ===================== -->
+  <!-- Section pertama yang muncul saat halaman dibuka -->
+  <section class="hero">
+    <!-- Tag h1 untuk judul utama halaman (Modul 2: Elemen HTML) -->
+    <h1 class="hero-title">
+      <em>Dunia</em><br />Bintang
+    </h1>
+
+    <!-- Tag p untuk paragraf deskripsi (Modul 2: Elemen HTML) -->
+    <p class="hero-sub">
+      Menjelajahi keajaiban bintang —<br />
+      cahaya yang menembus kegelapan abadi.
+    </p>
+
+    <!-- Tombol dengan onclick Inline JS: menampilkan alert (Modul 4: Inline JavaScript) -->
+    <button
+      class="btn-hero"
+      onclick="alert('Selamat datang di Stellar! Bersiaplah menjelajahi alam semesta 🌟')"
+    >
+      Mulai Menjelajah
+    </button>
+
+    <!-- Tanggal hari ini ditampilkan oleh JavaScript (Modul 4: Date) -->
+    <p class="hero-date" id="tanggalHariIni"></p>
+  </section>
+
+  <!-- ===================== SECTION TENTANG ===================== -->
+  <section class="section" id="tentang">
+    <!-- h2 sebagai sub-judul section (Modul 2: Elemen HTML) -->
+    <h2 class="section-title">Apa Itu Bintang?</h2>
+
+    <!-- Card glass morphism berisi deskripsi -->
+    <div class="card glass">
+      <!-- Gambar dari internet dengan atribut alt (Modul 7: Gambar) -->
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Stellar_classification_chart_-_named_stars.png/640px-Stellar_classification_chart_-_named_stars.png"
+        alt="Klasifikasi bintang berdasarkan warna dan suhu"
+        class="card-img"
+      />
+
+      <!-- Konten teks dengan berbagai formatting HTML (Modul 2: Formatting) -->
+      <div class="card-body">
+        <h3>Bintang <mark>(Noun)</mark></h3>
+
+        <!-- p untuk paragraf biasa -->
+        <p>
+          Bintang adalah bola gas raksasa yang memancarkan cahaya dan panas
+          melalui reaksi fusi nuklir di intinya. Matahari kita sendiri adalah
+          sebuah bintang berukuran <strong>sedang</strong>.
+        </p>
+
+        <!-- em untuk teks yang ditekankan / italic -->
+        <p>
+          <em>Cahaya bintang yang kita lihat malam ini mungkin sudah
+          menempuh perjalanan ribuan tahun cahaya untuk sampai ke mata kita.</em>
+        </p>
+
+        <!-- sub dan sup untuk teks subscript dan superscript -->
+        <p>
+          Suhu permukaan bintang bisa mencapai 3.500 K hingga 50.000 K.
+          Luminositas: L<sub>☉</sub> = 3.83 × 10<sup>26</sup> Watt.
+        </p>
+
+        <!-- del untuk teks yang dicoret, ins untuk yang disisipkan -->
+        <p>
+          Bintang <del>tidak bisa dilihat siang hari</del>
+          <ins>sebenarnya tetap ada siang hari</ins>, hanya tertutupi cahaya matahari.
+        </p>
+
+        <!-- Tombol yang memanggil fungsi eksternal JS (Modul 4: Eksternal JS) -->
+        <button class="btn-card" onclick="tampilkanInfo()">
+          Lihat Info Lengkap
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SECTION GALERI ===================== -->
+  <section class="section" id="galeri">
+    <h2 class="section-title">Galeri Bintang</h2>
+
+    <!-- Grid galeri gambar responsive menggunakan picture & img (Modul 7: Gambar Responsif) -->
+    <div class="gallery-grid">
+
+      <!-- Gambar 1: menggunakan tag picture dengan source responsif -->
+      <figure class="gallery-item glass">
+        <picture>
+          <!-- Sumber gambar untuk layar lebar (>600px) -->
+          <source
+            media="(min-width: 600px)"
+            srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Sun_poster.svg/640px-Sun_poster.svg.png"
+          />
+          <!-- Gambar default / fallback -->
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Sun_poster.svg/320px-Sun_poster.svg.png"
+            alt="Matahari - bintang terdekat kita"
+            style="width:auto;"
+          />
+        </picture>
+        <figcaption>☀️ Matahari</figcaption>
+      </figure>
+
+      <!-- Gambar 2 -->
+      <figure class="gallery-item glass">
+        <picture>
+          <source
+            media="(min-width: 600px)"
+            srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Stellar_Evolution.png/640px-Stellar_Evolution.png"
+          />
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Stellar_Evolution.png/320px-Stellar_Evolution.png"
+            alt="Siklus hidup bintang"
+            style="width:auto;"
+          />
+        </picture>
+        <figcaption>🌟 Siklus Hidup Bintang</figcaption>
+      </figure>
+
+      <!-- Gambar 3 -->
+      <figure class="gallery-item glass">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/The_Milky_Way_as_seen_from_Stillwater_Lake.jpg/640px-The_Milky_Way_as_seen_from_Stillwater_Lake.jpg"
+          alt="Galaksi Bima Sakti penuh bintang"
+          style="width:100%; height:180px; object-fit:cover; border-radius:10px;"
+        />
+        <figcaption>🌌 Bima Sakti</figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- ===================== SECTION FAKTA ===================== -->
+  <section class="section" id="fakta">
+    <h2 class="section-title">Fakta Menarik</h2>
+
+    <!-- Unordered list untuk daftar tanpa nomor (Modul 2: ul & li) -->
+    <div class="card glass">
+      <div class="card-body">
+        <p><strong>Fakta Umum:</strong></p>
+        <ul>
+          <li>Ada lebih dari <strong>200 miliar</strong> bintang di galaksi Bima Sakti.</li>
+          <li>Bintang terdekat selain Matahari adalah <em>Proxima Centauri</em>, berjarak 4,2 tahun cahaya.</li>
+          <li>Bintang terbesar yang diketahui adalah <mark>UY Scuti</mark>, 1.700 kali lebih besar dari Matahari.</li>
+          <li>Bintang neutron bisa berputar hingga <sub>700</sub> kali per detik.</li>
+        </ul>
+
+        <!-- Ordered list untuk daftar bernomor (Modul 2: ol & li) -->
+        <p><strong>Urutan Klasifikasi Bintang (Harvard):</strong></p>
+        <ol>
+          <li>Tipe O — Biru, sangat panas (> 30.000 K)</li>
+          <li>Tipe B — Biru-putih</li>
+          <li>Tipe A — Putih</li>
+          <li>Tipe F — Kuning-putih</li>
+          <li>Tipe G — Kuning (seperti Matahari)</li>
+          <li>Tipe K — Oranye</li>
+          <li>Tipe M — Merah, paling dingin</li>
+        </ol>
+
+        <!-- Tombol memanggil fungsi JS eksternal (Modul 4) -->
+        <button class="btn-card" onclick="tampilkanFakta()">
+          Fakta Acak ✨
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SECTION MEDIA (Modul 7) ===================== -->
+  <section class="section" id="media">
+    <h2 class="section-title">Media Stellar</h2>
+
+    <div class="media-grid">
+
+      <!-- VIDEO: Menampilkan video bintang/galaksi (Modul 7: Video) -->
+      <div class="media-card glass" id="videoCard">
+        <h3>🎬 Video Galaksi</h3>
+        <hr class="divider" />
+        <!-- controls: tombol play/pause, loop: diulang, muted: tanpa suara agar autoplay bisa jalan -->
+        <video
+          controls
+          loop
+          muted
+          autoplay
+          preload="auto"
+          width="100%"
+          style="border-radius: 10px;"
+          poster="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/The_Milky_Way_as_seen_from_Stillwater_Lake.jpg/640px-The_Milky_Way_as_seen_from_Stillwater_Lake.jpg"
+        >
+          <!-- Source video dari URL publik, format mp4 -->
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+          <!-- Fallback ogg jika browser tidak support mp4 -->
+          <source src="https://www.w3schools.com/html/mov_bbb.ogg" type="video/ogg" />
+          <!-- Teks ini muncul jika browser tidak mendukung tag video sama sekali -->
+          Browser kamu tidak mendukung tag video.
+        </video>
+        <p class="media-caption">Klik untuk merasakan keajaiban galaksi ✨</p>
+      </div>
+
+      <!-- AUDIO: Menampilkan audio (Modul 7: Audio) -->
+      <div class="media-card glass" id="audioCard">
+        <h3>🎵 Suara Alam Semesta</h3>
+        <hr class="divider" />
+        <p class="media-caption">Rekaman suara luar angkasa oleh NASA:</p>
+        <!-- controls: menampilkan tombol play/pause audio -->
+        <audio controls style="width:100%; margin-top: 10px;">
+          <!-- Format mp3 (audio/mpeg) -->
+          <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg" />
+          <!-- Format ogg sebagai fallback -->
+          <source src="https://www.w3schools.com/html/horse.ogg" type="audio/ogg" />
+          <!-- Pesan fallback jika browser tidak support audio -->
+          Browser kamu tidak mendukung tag audio.
+        </audio>
+        <p class="media-caption" style="margin-top:12px; font-style:italic;">
+          *Demo audio — simbol suara kosmik
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <!-- small untuk teks kecil (Modul 2: Formatting) -->
+    <small>✦ STELLAR &copy; 2025 — Dibuat dengan HTML, CSS &amp; JavaScript</small>
+    <br />
+    <!-- Tanggal footer dari JS -->
+    <small id="tanggalFooter"></small>
+  </footer>
+
+  <!-- ===================== SCRIPT INTERNAL (Modul 4: Internal JS) ===================== -->
+  <script>
+    // alert langsung muncul saat halaman pertama kali dibuka
+    alert("Selamat datang di STELLAR! 🌟\nHalaman tentang keajaiban bintang di alam semesta.");
+  </script>
+
+  <!-- Link ke file JavaScript eksternal (Modul 4: Eksternal JS) -->
+  <!-- Ditulis sebelum </body> agar HTML sudah selesai dimuat sebelum JS berjalan -->
+  <script src="script.js"></script>
+
+</body>
+</html>
